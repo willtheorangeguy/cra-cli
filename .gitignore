@@ -1,0 +1,33 @@
+# Node.js
+node_modules/
+dist/
+.env
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+
+# Test coverage
+coverage/
+
+# Local data
+.cra-cli/
+
+# Build artifacts
+*.tsbuildinfo
+
+# Misc
+*.local
+*.cache
+
+# Session state (Copilot)
+.copilot/
