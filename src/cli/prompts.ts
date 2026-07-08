@@ -275,7 +275,7 @@ export async function promptUndoSelection(
   
   const { action } = await inquirer.prompt([
     {
-      type: 'list',
+      type: 'select',
       name: 'action',
       message: 'What would you like to undo?',
       choices,

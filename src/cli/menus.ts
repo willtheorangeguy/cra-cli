@@ -71,7 +71,7 @@ export async function runSetupWizard(): Promise<UserData> {
 export async function showMainMenu(): Promise<MainMenuChoice> {
   const { choice } = await inquirer.prompt([
     {
-      type: 'list',
+      type: 'select',
       name: 'choice',
       message: 'What would you like to do?',
       choices: [
@@ -92,7 +92,7 @@ export async function showMainMenu(): Promise<MainMenuChoice> {
 export async function showTFSAMenu(): Promise<MenuAction> {
   const { action } = await inquirer.prompt([
     {
-      type: 'list',
+      type: 'select',
       name: 'action',
       message: 'TFSA Options:',
       choices: [
@@ -118,7 +118,7 @@ export async function showTFSAMenu(): Promise<MenuAction> {
 export async function showFHSAMenu(): Promise<MenuAction> {
   const { action } = await inquirer.prompt([
     {
-      type: 'list',
+      type: 'select',
       name: 'action',
       message: 'FHSA Options:',
       choices: [
@@ -143,7 +143,7 @@ export async function showFHSAMenu(): Promise<MenuAction> {
 export async function showSettingsMenu(): Promise<'update_profile' | 'view_profile' | 'back'> {
   const { action } = await inquirer.prompt([
     {
-      type: 'list',
+      type: 'select',
       name: 'action',
       message: 'Settings:',
       choices: [
