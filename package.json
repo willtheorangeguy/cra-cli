@@ -33,7 +33,7 @@
     "cli-table3": "^0.6.5",
     "date-fns": "^4.4.0",
     "inquirer": "^14.0.2",
-    "typescript": "^5.9.3",
+    "typescript": "^7.0.2",
     "uuid": "^14.0.0"
   },
   "devDependencies": {
