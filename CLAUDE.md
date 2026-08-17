@@ -4,7 +4,7 @@
 
 CRA CLI is a Node.js command-line application for tracking Canadian tax-advantaged account contributions (TFSA and FHSA). It calculates available contribution room based on Canada Revenue Agency rules.
 
-**Published to npm as `cra-cli`.** Version 1.0.0, ISC license.
+**Published to npm as `cra-cli`.** Version 1.0.0, MIT license.
 
 ## Tech Stack
 

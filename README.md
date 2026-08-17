@@ -166,7 +166,7 @@ This tool is for personal tracking purposes only. It is not affiliated with the 
 
 ## License
 
-ISC License
+MIT License — see [LICENSE.md](LICENSE.md).
 
 ## Contributing
 
