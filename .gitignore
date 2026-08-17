@@ -31,3 +31,5 @@ coverage/
 
 # Session state (Copilot)
 .copilot/
+.bandit/
+.recall/
