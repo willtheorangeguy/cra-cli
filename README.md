@@ -49,7 +49,7 @@ Run `cra-cli` and answer the prompts. The first run asks for your birth year, wh
 ## Documentation
 
 Full documentation lives in [`docs/`](docs/README.md):
-[Installation](docs/installation.md) · [Usage](docs/usage.md) · [Contribution rules](docs/rules.md) · [Development](docs/development.md)
+[Quickstart](docs/quickstart.md) · [Installation](docs/installation.md) · [Architecture](docs/architecture.md) · [Contribution rules](docs/rules.md) · [FAQ](docs/faq.md) · [Troubleshooting](docs/troubleshooting.md) · [Roadmap](docs/roadmap.md)
 
 ## Support
 

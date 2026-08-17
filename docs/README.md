@@ -8,10 +8,15 @@ whole point — the number the CRA shows you is a year out of date the moment yo
 cra-cli/
 ├── docs/
 │   ├── README.md          this page
+│   ├── quickstart.md      install, first run, entering history
 │   ├── installation.md    npm, from source, requirements
+│   ├── architecture.md    layers, data model, why room is derived
 │   ├── usage.md           menus, data storage, export
 │   ├── rules.md           the TFSA and FHSA rules this tool implements
-│   └── development.md     architecture, tests, CI
+│   ├── development.md     commands, stack, conventions, CI
+│   ├── faq.md             privacy, room discrepancies, what is not tracked
+│   ├── troubleshooting.md wrong numbers, build problems, lost data
+│   └── roadmap.md         known defects and deliberate non-goals
 └── src/
     ├── index.ts           entry point
     ├── cli/               menus, prompts, display
@@ -23,13 +28,19 @@ cra-cli/
 
 ## Pages
 
+- [Quickstart](./quickstart.md) — install, answer two questions, enter your history
 - [Installation](./installation.md) — global install, running from source
+- [Architecture](./architecture.md) — layers, the data model, why room is never stored
 - [Usage](./usage.md) — first run, menus, where your data lives, exporting
-- [Contribution rules](./rules.md) — annual limits, room formulas, and what this tool does not model
-- [Development](./development.md) — architecture, tests, CI
+- [Contribution rules](./rules.md) — annual limits, room formulas, what is not modelled
+- [Development](./development.md) — commands, stack, conventions, CI
+- [FAQ](./faq.md) — privacy, why room differs from CRA My Account, what is not tracked
+- [Troubleshooting](./troubleshooting.md) — wrong figures, build failures, lost data
+- [Roadmap](./roadmap.md) — known defects and non-goals
 
 ## Before you rely on a number
 
 The calculations follow published CRA rules, but this is a personal tool, not a filing
-system. [rules.md](./rules.md) sets out both what is implemented and what is deliberately
-not — read it before treating a projection as authoritative.
+system — and **the TFSA limits table currently stops at 2025**, which understates room for
+later years. [rules.md](./rules.md) sets out what is implemented;
+[roadmap.md](./roadmap.md) sets out what is broken.

@@ -24,40 +24,16 @@ npm link             # put the local build on PATH as cra-cli
 
 ## Architecture
 
-```
-src/
-├── index.ts              entry point — shebang, runs the main loop
-├── cli/
-│   ├── menus.ts          Inquirer menu system
-│   ├── prompts.ts        input prompts with validation
-│   └── display.ts        formatted terminal output
-├── services/
-│   ├── tfsa.ts           TFSA room calculations
-│   ├── fhsa.ts           FHSA room calculations
-│   └── export.ts         CSV export
-├── storage/storage.ts    JSON persistence to ~/.cra-cli/data.json
-├── types/index.ts        TypeScript interfaces
-└── utils/
-    ├── constants.ts      annual limits and tax-year constants
-    ├── dates.ts          date utilities
-    └── validation.ts     input validation
-```
-
-Four layers, in dependency order: CLI (menus, prompts, display) → services (business
-logic) → storage (persistence), with utils shared throughout.
-
-### Services are pure
-
-The calculation functions in `services/` have no side effects. They take state and return
-a result; they do not read files, prompt, or print. That is what makes `tests/tfsa.test.ts`
-and `tests/fhsa.test.ts` able to cover the rules directly, and it is the property to
-preserve — persistence belongs in `storage/`, presentation in `cli/`.
+Layers, the data model, and why contribution room is derived rather than stored are
+documented separately in [Architecture](./architecture.md).
 
 ### Adding an annual limit
 
-New TFSA limits go in `constants.ts`. Nothing else needs to change: room calculation sums
-whatever the table contains, so a missing year is silently treated as zero rather than
-raising an error. Add the year, then extend the tests.
+New TFSA limits go in `src/utils/constants.ts`. Nothing else needs to change: room
+calculation sums whatever the table contains, so a missing year is silently treated as zero
+rather than raising an error. Add the year, then extend the tests.
+
+This is currently outstanding — the table stops at 2025. See [Roadmap](./roadmap.md).
 
 ## Conventions
 
