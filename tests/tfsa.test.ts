@@ -11,7 +11,19 @@ import {
   calculateWithdrawalsRoomAdded,
   calculateContributionsInYear,
 } from '../src/services/tfsa.js';
-import { TFSA_ANNUAL_LIMITS } from '../src/utils/constants.js';
+import {
+  TFSA_ANNUAL_LIMITS,
+  TFSA_LATEST_KNOWN_YEAR,
+  getTFSAAnnualLimit,
+  isTFSALimitEstimated,
+} from '../src/utils/constants.js';
+
+/** Sum of published annual limits from 2009 through the given year */
+function sumLimitsThrough(endYear: number): number {
+  return Object.entries(TFSA_ANNUAL_LIMITS)
+    .filter(([year]) => Number(year) <= endYear)
+    .reduce((sum, [, limit]) => sum + limit, 0);
+}
 
 describe('TFSA Calculations', () => {
   describe('getFirstEligibleYear', () => {
@@ -44,8 +56,13 @@ describe('TFSA Calculations', () => {
     it('should calculate correct room for someone eligible since 2009', () => {
       // Born 1980, eligible since 2009
       // Sum of all limits from 2009 to 2025
-      const expected = Object.values(TFSA_ANNUAL_LIMITS).reduce((a, b) => a + b, 0);
-      expect(calculateAccumulatedRoom(1980, 2025)).toBe(expected);
+      expect(calculateAccumulatedRoom(1980, 2025)).toBe(sumLimitsThrough(2025));
+    });
+
+    it('should include 2026 in accumulated room', () => {
+      // Born 1980, eligible since 2009
+      expect(calculateAccumulatedRoom(1980, 2026)).toBe(sumLimitsThrough(2026));
+      expect(calculateAccumulatedRoom(1980, 2026) - calculateAccumulatedRoom(1980, 2025)).toBe(7000);
     });
 
     it('should calculate correct room for partial years', () => {
@@ -153,8 +170,7 @@ describe('TFSA Room Scenarios', () => {
   it('should calculate room for new account holder with no activity', () => {
     // Born 1990, eligible since 2009, no contributions
     const accumulatedRoom = calculateAccumulatedRoom(1990, 2025);
-    const totalLimits = Object.values(TFSA_ANNUAL_LIMITS).reduce((a, b) => a + b, 0);
-    expect(accumulatedRoom).toBe(totalLimits);
+    expect(accumulatedRoom).toBe(sumLimitsThrough(2025));
   });
 
   it('should reduce room by contributions', () => {
@@ -180,5 +196,33 @@ describe('TFSA Room Scenarios', () => {
     
     const currentRoom = accumulatedRoom - totalContributed + withdrawalRoomAdded;
     expect(currentRoom).toBe(accumulatedRoom - 50000 + 10000);
+  });
+});
+
+describe('TFSA annual limits', () => {
+  it('should have a published limit for every year from 2009 to the latest known year', () => {
+    for (let year = 2009; year <= TFSA_LATEST_KNOWN_YEAR; year++) {
+      expect(TFSA_ANNUAL_LIMITS[year], `missing TFSA limit for ${year}`).toBeGreaterThan(0);
+    }
+  });
+
+  it('should know the published 2026 limit', () => {
+    expect(TFSA_ANNUAL_LIMITS[2026]).toBe(7000);
+    expect(getTFSAAnnualLimit(2026)).toBe(7000);
+    expect(isTFSALimitEstimated(2026)).toBe(false);
+  });
+
+  it('should cover the current year with a published limit', () => {
+    expect(isTFSALimitEstimated(new Date().getFullYear())).toBe(false);
+  });
+
+  it('should flag years past the latest known year as estimated', () => {
+    const future = TFSA_LATEST_KNOWN_YEAR + 1;
+    expect(isTFSALimitEstimated(future)).toBe(true);
+    expect(getTFSAAnnualLimit(future)).toBe(TFSA_ANNUAL_LIMITS[TFSA_LATEST_KNOWN_YEAR]);
+  });
+
+  it('should return 0 for years before the program started', () => {
+    expect(getTFSAAnnualLimit(2008)).toBe(0);
   });
 });

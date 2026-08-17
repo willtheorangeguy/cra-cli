@@ -22,10 +22,17 @@ export const TFSA_ANNUAL_LIMITS: Record<number, number> = {
   2023: 6500,
   2024: 7000,
   2025: 7000,
+  2026: 7000,
 };
 
 /** TFSA program start year */
 export const TFSA_START_YEAR = 2009;
+
+/**
+ * Latest year for which the CRA has announced a TFSA dollar limit.
+ * Limits for years after this are estimates, not published figures.
+ */
+export const TFSA_LATEST_KNOWN_YEAR = Math.max(...Object.keys(TFSA_ANNUAL_LIMITS).map(Number));
 
 /** Minimum age to accumulate TFSA room (must be 18 or older) */
 export const TFSA_MINIMUM_AGE = 18;
@@ -49,23 +56,28 @@ export const FHSA_MAX_AGE = 71;
 export const FHSA_START_YEAR = 2023;
 
 /**
+ * Whether the limit for a year is an estimate rather than a published CRA figure
+ */
+export function isTFSALimitEstimated(year: number): boolean {
+  return year > TFSA_LATEST_KNOWN_YEAR;
+}
+
+/**
  * Get the TFSA annual limit for a given year
- * For future years not yet defined, uses the most recent known limit
+ * For future years not yet announced, estimates using the most recent known limit
+ * (see isTFSALimitEstimated to tell announced figures from estimates)
  */
 export function getTFSAAnnualLimit(year: number): number {
   if (year < TFSA_START_YEAR) {
     return 0;
   }
   
-  // If we have the limit for this year, return it
-  if (TFSA_ANNUAL_LIMITS[year] !== undefined) {
-    return TFSA_ANNUAL_LIMITS[year];
+  const limit = TFSA_ANNUAL_LIMITS[year];
+  if (limit !== undefined) {
+    return limit;
   }
   
-  // For future years, use the most recent known limit
-  const knownYears = Object.keys(TFSA_ANNUAL_LIMITS).map(Number).sort((a, b) => b - a);
-  const mostRecentYear = knownYears[0];
-  return TFSA_ANNUAL_LIMITS[mostRecentYear];
+  return TFSA_ANNUAL_LIMITS[TFSA_LATEST_KNOWN_YEAR];
 }
 
 /**
