@@ -1,168 +1,63 @@
-# CRA CLI - TFSA & FHSA Contribution Tracker
+<!-- Logo -->
+<h1 align="center">CRA CLI</h1>
 
-A command-line application to track your Canadian tax-advantaged account contributions and calculate your available contribution room based on CRA (Canada Revenue Agency) rules.
+<!-- Copy -->
+<h4 align="center">Track your TFSA and FHSA contributions and work out how much room you actually have left, from the terminal.</h4>
 
-## Features
+<!-- Badges -->
+<div align="center">
+  <img alt="GitHub Issues" src="https://img.shields.io/github/issues/willtheorangeguy/cra-cli">
+  <img alt="GitHub Pull Requests" src="https://img.shields.io/github/issues-pr/willtheorangeguy/cra-cli">
+  <img alt="License" src="https://img.shields.io/github/license/willtheorangeguy/cra-cli">
+  <img alt="CI" src="https://img.shields.io/github/actions/workflow/status/willtheorangeguy/cra-cli/ci.yml">
+  <img alt="npm" src="https://img.shields.io/npm/v/cra-cli">
+</div>
 
-### TFSA (Tax-Free Savings Account)
-- 📈 View current contribution room
-- ➕ Add contributions with date tracking
-- ➖ Record withdrawals (automatically added back to room the following year)
-- 📋 View complete transaction history
-- 🔮 Project contribution room for the next 5 years
-- 💾 Export transactions to CSV
-- ↩️ Undo last transaction
-- 🗑️ Reset account data
+<!-- Navigation -->
+<p align="center">
+  <a href="#key-features">Key Features</a> •
+  <a href="#installation">Installation</a> •
+  <a href="#usage">Usage</a> •
+  <a href="#documentation">Documentation</a> •
+  <a href="#support">Support</a> •
+  <a href="#contributing">Contributing</a> •
+  <a href="#license">License</a>
+</p>
 
-### FHSA (First Home Savings Account)
-- 📈 View current contribution room
-- ➕ Add contributions with date tracking
-- 📋 View complete transaction history
-- 🔮 Project contribution room for the next 5 years
-- 💾 Export transactions to CSV
-- ↩️ Undo last contribution
-- 🗑️ Reset account data
+## Key Features
+
+- Contribution room for both TFSA and FHSA, calculated from CRA rules rather than entered by hand.
+- Contributions and withdrawals recorded with dates, so room restores on the right January 1st.
+- Full transaction history, with an undo for the last entry.
+- Five-year room projections for each account.
+- CSV export of every transaction.
+- Entirely local — your data never leaves the machine.
 
 ## Installation
 
-### Prerequisites
-- Node.js 18 or higher
-
-### Install globally
 ```bash
 npm install -g cra-cli
-```
-
-### Or run from source
-```bash
-git clone https://github.com/willtheorangeguy/cra-cli.git
-cd cra-cli
-npm install
-npm run build
-npm link
-```
-
-## Usage
-
-Run the CLI:
-```bash
 cra-cli
 ```
 
-On first run, you'll be prompted to set up your profile:
-- Your birth year (used to calculate TFSA eligibility from age 18)
-- Whether you've opened an FHSA (and when)
+Requires Node.js 20 or higher. See [`docs/installation.md`](docs/installation.md) to run from source instead.
 
-### Main Menu
-```
-? What would you like to do?
-❯ 📊 TFSA - Tax-Free Savings Account
-  🏠 FHSA - First Home Savings Account
-  ⚙️  Settings
-  👋 Exit
-```
+## Usage
 
-## How Contribution Room Works
+Run `cra-cli` and answer the prompts. The first run asks for your birth year, which sets when TFSA eligibility began, and whether you have an FHSA. After that it is a menu.
 
-### TFSA Rules
+## Documentation
 
-**Annual Limits (Historical)**
-| Year | Limit |
-|------|-------|
-| 2009-2012 | $5,000 |
-| 2013-2014 | $5,500 |
-| 2015 | $10,000 |
-| 2016-2018 | $5,500 |
-| 2019-2022 | $6,000 |
-| 2023 | $6,500 |
-| 2024-2025 | $7,000 |
+Full documentation lives in [`docs/`](docs/README.md):
+[Quickstart](docs/quickstart.md) · [Installation](docs/installation.md) · [Architecture](docs/architecture.md) · [Contribution rules](docs/rules.md) · [FAQ](docs/faq.md) · [Troubleshooting](docs/troubleshooting.md) · [Roadmap](docs/roadmap.md)
 
-**Room Calculation:**
-```
-TFSA Room = Sum of annual limits (from age 18 or 2009, whichever is later)
-          - Total contributions made
-          + Withdrawals from previous years
-```
+## Support
 
-**Key Points:**
-- You start accumulating room from the year you turn 18, or 2009, whichever is later
-- Unused room carries forward indefinitely
-- Withdrawals are added back to your room on January 1 of the following year
-- Over-contributions incur a 1% monthly penalty
+Open a [GitHub Discussion](https://github.com/willtheorangeguy/cra-cli/discussions/new) or file an [issue](https://github.com/willtheorangeguy/cra-cli/issues/new/choose).
 
-### FHSA Rules
+## Contributing
 
-**Limits:**
-- Annual limit: $8,000
-- Lifetime limit: $40,000
-- Carry-forward: Maximum $8,000 of unused room per year
-- Duration: Account can be open for 15 years or until age 71
-
-**Room Calculation:**
-```
-Year 1: $8,000
-Year 2+: $8,000 + min($8,000, unused room from previous year)
-Maximum room per year: $16,000
-```
-
-**Key Points:**
-- Must be a first-time home buyer to open
-- Cannot exceed $40,000 lifetime contributions
-- Unused room carries forward (capped at $8,000 per year)
-- Account must be closed after 15 years or when you turn 71
-
-## Data Storage
-
-Your data is stored locally in:
-- **Windows:** `C:\Users\<username>\.cra-cli\data.json`
-- **macOS/Linux:** `~/.cra-cli/data.json`
-
-## Development
-
-### Build
-```bash
-npm run build
-```
-
-### Run tests
-```bash
-npm test
-```
-
-### Run in development
-```bash
-npm run dev
-```
-
-## Project Structure
-```
-cra-cli/
-├── src/
-│   ├── index.ts              # Entry point
-│   ├── cli/
-│   │   ├── menus.ts          # Interactive menus
-│   │   ├── prompts.ts        # User input prompts
-│   │   └── display.ts        # Formatted output
-│   ├── services/
-│   │   ├── tfsa.ts           # TFSA calculations
-│   │   ├── fhsa.ts           # FHSA calculations
-│   │   └── export.ts         # CSV export
-│   ├── storage/
-│   │   └── storage.ts        # JSON file storage
-│   ├── utils/
-│   │   ├── constants.ts      # Annual limits
-│   │   ├── dates.ts          # Date utilities
-│   │   └── validation.ts     # Input validation
-│   └── types/
-│       └── index.ts          # TypeScript interfaces
-└── tests/
-    ├── tfsa.test.ts          # TFSA tests
-    └── fhsa.test.ts          # FHSA tests
-```
-
-## Disclaimer
-
-This tool is for personal tracking purposes only. It is not affiliated with the Canada Revenue Agency. Always verify your contribution room with official CRA sources (My Account) before making contributions. The calculations are based on publicly available CRA rules but may not account for all edge cases.
+Contributions welcome. See the org-wide [Contributing Guide](https://github.com/willtheorangeguy/.github/blob/main/CONTRIBUTING.md) and [Code of Conduct](https://github.com/willtheorangeguy/.github/blob/main/CODE_OF_CONDUCT.md).
 
 ## License
 
@@ -170,4 +65,4 @@ MIT License — see [LICENSE.md](LICENSE.md).
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+> **Not affiliated with the Canada Revenue Agency, and not tax advice.** This is a personal tracking tool. Confirm your real contribution room in CRA My Account before contributing — over-contributing to a TFSA costs 1% per month. Known limits of the calculation are in [`docs/rules.md`](docs/rules.md).
