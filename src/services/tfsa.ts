@@ -6,6 +6,7 @@
 import type { UserData, RoomCalculation, FutureProjection, Transaction } from '../types/index.js';
 import { 
   getTFSAAnnualLimit, 
+  isTFSALimitEstimated,
   TFSA_START_YEAR, 
   TFSA_MINIMUM_AGE 
 } from '../utils/constants.js';
@@ -187,7 +188,7 @@ export function projectTFSARoom(
       projectedRoom: Math.max(0, projectedRoom),
       annualLimit,
       cumulativeLimit: accumulatedRoom,
-      notes: i === 0 ? 'Current' : undefined,
+      notes: i === 0 ? 'Current' : (isTFSALimitEstimated(year) ? 'Estimated limit' : undefined),
     });
   }
   

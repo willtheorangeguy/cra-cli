@@ -18,8 +18,8 @@
     "url": "git+https://github.com/willtheorangeguy/cra-cli.git"
   },
   "keywords": ["tfsa", "fhsa", "cra", "canada", "tax", "contribution", "cli"],
-  "author": "",
-  "license": "ISC",
+  "author": "willtheorangeguy",
+  "license": "MIT",
   "type": "module",
   "bugs": {
     "url": "https://github.com/willtheorangeguy/cra-cli/issues"

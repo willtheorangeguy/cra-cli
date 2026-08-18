@@ -61,6 +61,8 @@ Contributions welcome. See the org-wide [Contributing Guide](https://github.com/
 
 ## License
 
-MIT — see [`LICENSE.md`](LICENSE.md).
+MIT License — see [LICENSE.md](LICENSE.md).
+
+## Contributing
 
 > **Not affiliated with the Canada Revenue Agency, and not tax advice.** This is a personal tracking tool. Confirm your real contribution room in CRA My Account before contributing — over-contributing to a TFSA costs 1% per month. Known limits of the calculation are in [`docs/rules.md`](docs/rules.md).
