@@ -27,7 +27,7 @@
   "homepage": "https://github.com/willtheorangeguy/cra-cli#readme",
   "dependencies": {
     "@types/inquirer": "^9.0.9",
-    "@types/node": "^26.2.0",
+    "@types/node": "^26.6.1",
     "@types/uuid": "^11.0.0",
     "chalk": "^6.0.0",
     "cli-table3": "^0.6.5",
