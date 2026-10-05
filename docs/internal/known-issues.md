@@ -1,18 +1,17 @@
-# Known Issues — cra-cli
+# Known issues
 
 Concrete defects and gaps found while writing this repository's documentation in
 August 2026. **Nothing here was changed** — each one needs a code, configuration, or
 licensing decision rather than a documentation one.
 
-Ordered by severity. See [`docs/roadmap.md`](../roadmap.md) for the narrative version,
+Ordered by severity. See [roadmap](../roadmap.md) for the narrative version,
 which also covers deliberate non-goals.
-
 
 **2 open:** 1 high, 1 medium.
 
 ## 1. TFSA annual limits stop at 2025, and a missing year is silently zero
 
-**Severity:** High  
+**Severity:** High
 **Where:** `src/utils/constants.ts`
 
 **What:** The annual-limit map ends at `2025: 7000`. Contribution room is calculated by summing whatever the table contains, and there is no validation that it reaches the current year.
@@ -23,7 +22,7 @@ which also covers deliberate non-goals.
 
 ## 2. package.json declares ISC while LICENSE.md is MIT
 
-**Severity:** Medium  
+**Severity:** Medium
 **Where:** `package.json`
 
 **What:** `"license": "ISC"` in the package metadata; `LICENSE.md` is the MIT text after the Wave 1 licensing sweep.
@@ -31,7 +30,6 @@ which also covers deliberate non-goals.
 **Why it matters:** This package **is published to npm**, so the registry advertises ISC for a repository that ships MIT.
 
 **Suggested fix:** Set `"license": "MIT"` and publish a patch release.
-
 
 ---
 

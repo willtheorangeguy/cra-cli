@@ -1,87 +1,55 @@
-# CRA CLI — Architecture
+# Architecture
 
-## Layout
+CRA CLI separates the interactive terminal interface from room calculations and local JSON persistence.
 
-```
-src/
-├── index.ts              entry point — shebang, runs the main loop
-├── cli/
-│   ├── menus.ts          Inquirer menu system
-│   ├── prompts.ts        input prompts with validation
-│   └── display.ts        formatted terminal output (Chalk, cli-table3)
-├── services/
-│   ├── tfsa.ts           TFSA room calculations
-│   ├── fhsa.ts           FHSA room calculations
-│   └── export.ts         CSV export
-├── storage/storage.ts    JSON persistence to ~/.cra-cli/data.json
-├── types/index.ts        TypeScript interfaces
-└── utils/
-    ├── constants.ts      annual limits and tax-year constants
-    ├── dates.ts          date utilities
-    └── validation.ts     input validation
+## Overview
+
+The diagram shows how a menu action moves through the application.
+
+```mermaid
+graph LR
+  A[User input] -->|selects actions| B[CLI menus and prompts]
+  B -->|loads and saves| C[JSON storage]
+  B -->|requests calculations| D[TFSA and FHSA services]
+  D -->|uses shared rules| E[Dates and annual limits]
+  B -->|formats results| F[Terminal display and CSV export]
 ```
 
-## Layers
+## Components
 
+### CLI
+
+`src/cli/` contains Inquirer prompts, menu actions, and terminal output. It coordinates the services and storage but does not define annual limits.
+
+### Services
+
+`src/services/` calculates TFSA and FHSA room, projections, and CSV output. Room calculations take the profile and transactions as input and return results.
+
+### Storage
+
+`src/storage/storage.ts` reads and writes the local JSON profile. It also creates the initial data shape and applies transaction changes.
+
+### Utilities and types
+
+`src/utils/` holds annual limits, date helpers, and validation. `src/types/` defines the profile and transaction structures shared across the layers.
+
+## Data flow
+
+The entry point loads the local profile, then starts the main menu. Menu actions call storage to update a transaction or call a service to calculate room. The CLI formats results for the terminal. Changes are persisted to the JSON file in the user's home directory.
+
+## Directory layout
+
+```text
+.
+├── src/              CLI, calculation services, storage, and shared utilities
+├── tests/            TFSA and FHSA calculation tests
+├── docs/             MkDocs source and writing standard
+├── .github/workflows/ CI, release, docs build, and docs lint workflows
+└── package.json      npm scripts, dependencies, and executable entry point
 ```
-   cli/          menus, prompts, display
-     │
-     ▼
-   services/     pure calculation — no side effects
-     │
-     ▼
-   storage/      JSON read and write
 
-   utils/        shared by all three
-```
+## Design decisions
 
-Four layers in dependency order, with `utils/` available throughout.
+Room is derived from the profile, annual limits, and dated transactions instead of being saved as a separate value. This keeps the displayed total tied to the history, while making missing transaction history or annual-limit entries affect the calculation.
 
-## Services are pure
-
-The calculation functions in `services/` have **no side effects**. They take state and
-return a result; they do not read files, prompt, or print.
-
-That is the property that makes `tests/tfsa.test.ts` and `tests/fhsa.test.ts` able to test
-the CRA rules directly, without mocking a filesystem or driving a prompt library. It is
-also the constraint to preserve: persistence belongs in `storage/`, presentation in `cli/`.
-A calculation that needs to save something is a sign the wrong layer is doing the work.
-
-## Data model
-
-Everything lives in one JSON file:
-
-| Platform | Path |
-|---|---|
-| Windows | `C:\Users\<username>\.cra-cli\data.json` |
-| macOS and Linux | `~/.cra-cli/data.json` |
-
-Transactions carry UUID v4 identifiers and ISO `YYYY-MM-DD` dates. There is no database,
-no migration system, and no server — the file is readable and hand-editable, which is
-appropriate for personal financial records that need to outlive the tool.
-
-The corollary: **nothing can reconstruct your history if the file is lost.** Back it up.
-
-## Room is derived, never stored
-
-Contribution room is not a field. It is recomputed from your birth year, the annual limits
-table, and your transaction history every time it is displayed.
-
-That is why entering historical contributions matters, and why a missing annual limit in
-`constants.ts` silently changes every figure — see below.
-
-## Annual limits
-
-TFSA limits live in `utils/constants.ts` as a year-to-amount map. Room calculation sums
-whatever the table contains.
-
-**A missing year contributes zero and raises nothing.** There is no validation that the
-table extends to the current year, so an out-of-date constants file produces understated
-room rather than an error. Adding a year requires only the map entry; the calculation picks
-it up automatically. See [Roadmap](./roadmap.md).
-
-## Functional style
-
-The codebase returns new data rather than mutating, uses strict TypeScript with no `any`,
-and compiles from `src/` to a gitignored `dist/`. Comments appear only where they explain a
-non-obvious *why*.
+{{ support() }}

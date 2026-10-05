@@ -40,7 +40,7 @@ npm install -g cra-cli
 cra-cli
 ```
 
-Requires Node.js 20 or higher. See [`docs/installation.md`](docs/installation.md) to run from source instead.
+Requires Node.js 20 or higher. See the [installation guide](https://williamvdg.me/cra-cli/installation/) to run from source instead.
 
 ## Usage
 
@@ -48,8 +48,7 @@ Run `cra-cli` and answer the prompts. The first run asks for your birth year, wh
 
 ## Documentation
 
-Full documentation lives in [`docs/`](docs/README.md):
-[Quickstart](docs/quickstart.md) · [Installation](docs/installation.md) · [Architecture](docs/architecture.md) · [Contribution rules](docs/rules.md) · [FAQ](docs/faq.md) · [Troubleshooting](docs/troubleshooting.md) · [Roadmap](docs/roadmap.md)
+Full documentation is available on the [CRA CLI documentation site](https://williamvdg.me/cra-cli/), including the [getting started guide](https://williamvdg.me/cra-cli/getting-started/), [installation](https://williamvdg.me/cra-cli/installation/), [architecture](https://williamvdg.me/cra-cli/architecture/), [contribution rules](https://williamvdg.me/cra-cli/rules/), [FAQ](https://williamvdg.me/cra-cli/faq/), [troubleshooting](https://williamvdg.me/cra-cli/troubleshooting/), and [roadmap](https://williamvdg.me/cra-cli/roadmap/).
 
 ## Support
 
@@ -65,4 +64,4 @@ MIT License — see [LICENSE.md](LICENSE.md).
 
 ## Contributing
 
-> **Not affiliated with the Canada Revenue Agency, and not tax advice.** This is a personal tracking tool. Confirm your real contribution room in CRA My Account before contributing — over-contributing to a TFSA costs 1% per month. Known limits of the calculation are in [`docs/rules.md`](docs/rules.md).
+> **Not affiliated with the Canada Revenue Agency, and not tax advice.** This is a personal tracking tool. Confirm your real contribution room in CRA My Account before contributing — over-contributing to a TFSA costs 1% per month. Known limits of the calculation are in the [contribution rules](https://williamvdg.me/cra-cli/contribution-rules/).

@@ -1,4 +1,4 @@
-# CRA CLI — Troubleshooting
+# Troubleshooting
 
 ## Contribution room looks too low
 
@@ -64,7 +64,7 @@ only.
 ## My data file disappeared
 
 | Platform | Path |
-|---|---|
+| --- | --- |
 | Windows | `C:\Users\<username>\.cra-cli\data.json` |
 | macOS and Linux | `~/.cra-cli/data.json` |
 
@@ -76,4 +76,4 @@ not see it, check it is valid JSON; a hand edit that broke the syntax will preve
 Projections assume the most recent **known** annual limit continues. Since limits are
 indexed to inflation and announced yearly, and the table stops at 2025, projections inherit
 that staleness. They also model no investment growth. See
-[Contribution rules](./rules.md#what-this-tool-does-not-model).
+[Contribution rules](contribution-rules.md#what-this-tool-does-not-model).

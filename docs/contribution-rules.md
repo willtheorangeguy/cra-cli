@@ -1,4 +1,4 @@
-# CRA CLI — Contribution Rules
+# Contribution rules
 
 The rules this tool implements, and where its model stops. Annual limits live in
 `src/utils/constants.ts`; the calculations are pure functions in `src/services/`.
@@ -8,7 +8,7 @@ The rules this tool implements, and where its model stops. Annual limits live in
 ### Annual limits
 
 | Year | Limit |
-|---|---|
+| --- | --- |
 | 2009–2012 | $5,000 |
 | 2013–2014 | $5,500 |
 | 2015 | $10,000 |
@@ -25,7 +25,7 @@ The rules this tool implements, and where its model stops. Annual limits live in
 
 ### Room calculation
 
-```
+```text
 TFSA room = sum of annual limits from the later of age 18 or 2009
           - total contributions made
           + withdrawals from previous years
@@ -47,7 +47,7 @@ TFSA room = sum of annual limits from the later of age 18 or 2009
 ### Limits
 
 | Rule | Value |
-|---|---|
+| --- | --- |
 | Annual limit | $8,000 |
 | Lifetime limit | $40,000 |
 | Maximum carry-forward | $8,000 per year |
@@ -56,7 +56,7 @@ TFSA room = sum of annual limits from the later of age 18 or 2009
 
 ### Room calculation
 
-```
+```text
 Year 1:   $8,000
 Year 2+:  $8,000 + min($8,000, unused room from the previous year)
 ```

@@ -1,4 +1,4 @@
-# CRA CLI — Usage
+# Usage
 
 ## First run
 
@@ -13,7 +13,7 @@ Both are stored locally and can be changed later under Settings.
 
 ## The main menu
 
-```
+```text
 ? What would you like to do?
 ❯ 📊 TFSA - Tax-Free Savings Account
   🏠 FHSA - First Home Savings Account
@@ -24,7 +24,7 @@ Both are stored locally and can be changed later under Settings.
 ## What each account supports
 
 | Action | TFSA | FHSA |
-|---|---|---|
+| --- | --- | --- |
 | View current contribution room | Yes | Yes |
 | Add a contribution, with date | Yes | Yes |
 | Record a withdrawal | Yes | No |
@@ -35,7 +35,7 @@ Both are stored locally and can be changed later under Settings.
 | Reset the account | Yes | Yes |
 
 Withdrawals exist only for TFSA because FHSA withdrawals do not restore room — see
-[Contribution rules](./rules.md).
+[Contribution rules](contribution-rules.md).
 
 ## Dates matter
 
@@ -47,7 +47,7 @@ when that room comes back. Enter the real date.
 ## Where your data lives
 
 | Platform | Path |
-|---|---|
+| --- | --- |
 | Windows | `C:\Users\<username>\.cra-cli\data.json` |
 | macOS and Linux | `~/.cra-cli/data.json` |
 

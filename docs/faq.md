@@ -1,69 +1,29 @@
-# CRA CLI — FAQ
+# FAQ
 
-## Is this affiliated with the CRA?
+## Common questions
 
-No. It is a personal tracking tool that implements published CRA rules. Always verify
-against [CRA My Account](https://www.canada.ca/en/revenue-agency/services/e-services/e-services-individuals/account-individuals.html)
-before contributing.
+???+ question "Why is my contribution room lower than CRA My Account?"
 
-## Does my financial data leave my machine?
+    Check that you entered your full contribution history and set the correct birth year. The TFSA annual limits table currently ends at 2025, so later years add no room. The CRA figure may also lag contributions reported by financial institutions. Verify against [CRA My Account](https://www.canada.ca/en/revenue-agency/services/e-services/e-services-individuals/account-individuals.html).
 
-No. Everything is a JSON file in your home directory. There is no server, no account, and
-no network call anywhere in the tool.
+??? question "Why does a TFSA withdrawal not restore room right away?"
 
-## Why does it ask for my birth year?
+    The tool adds withdrawal room on January 1 of the following year. A withdrawal made during this year does not increase the room available for another contribution this year.
 
-Because TFSA room accumulates from the year you turn 18, or 2009, whichever is later. Your
-birth year determines your entire contribution history, not just your eligibility today.
+??? question "Where does CRA CLI save my data?"
 
-## Why is my contribution room lower than CRA My Account says?
+    It stores profile and transaction data in `.cra-cli/data.json` under your home directory. On macOS and Linux, that is `~/.cra-cli/data.json`; on Windows, it is under your user profile directory. The file is local JSON and is not uploaded by the CLI.
 
-Two likely reasons, and one is a known defect:
+??? question "Why can’t I record an FHSA withdrawal?"
 
-1. **You have not entered your full contribution history.** Room is derived from your
-   transactions, not stored, so it is only correct once the history is in.
-2. **The annual limits table stops at 2025.** A missing year contributes zero, silently, so
-   figures for later years are understated. See [Roadmap](./roadmap.md).
+    The CLI records FHSA contributions only. FHSA withdrawals do not restore contribution room in its calculation model.
 
-Note the CRA's own figure lags — it reflects contributions reported by your institution,
-which can be a year behind.
+## Troubleshooting
 
-## Why doesn't my withdrawal show as available room?
+### `cra-cli: command not found`
 
-Because it is not yet. TFSA withdrawal room returns on **1 January of the following year**,
-not immediately. Withdrawing and re-contributing in the same calendar year is the standard
-way people over-contribute by accident, and it costs 1% per month on the excess.
+**Cause.** The global npm executable directory is not on your `PATH`, or the package has not been installed globally.
 
-## Why can't I record an FHSA withdrawal?
+**Fix.** Install the package globally with `npm install -g cra-cli`, or link the source checkout.
 
-FHSA withdrawals do not restore room, so there is nothing for the calculation to do with
-one. See [Contribution rules](./rules.md).
-
-## Does it track my investment returns?
-
-No. It tracks **room**, not balances. Gains inside a TFSA do not consume room and losses do
-not restore it — but the tool does not know your balance at all.
-
-## Does it calculate over-contribution penalties?
-
-No. The 1% monthly charge is documented in [Contribution rules](./rules.md) but not
-computed or displayed.
-
-## Can I edit the data file directly?
-
-Yes. It is plain JSON with UUID identifiers and ISO dates. That is deliberate — personal
-financial records should outlive the tool that wrote them.
-
-## What happens if I lose the file?
-
-Nothing can reconstruct it. Back it up, or export to CSV regularly.
-
-## Can undo recover more than one mistake?
-
-No — undo is single-step. It fixes a mistyped amount, not a session's worth of them. Reset
-has no undo at all, so export first if the history matters.
-
-## Why does npm say the license is ISC when the repo says MIT?
-
-`package.json` still declares ISC while `LICENSE.md` is MIT. That is a known
-inconsistency — see [Roadmap](./roadmap.md).
+{{ support() }}

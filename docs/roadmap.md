@@ -1,4 +1,4 @@
-# CRA CLI — Roadmap
+# Roadmap
 
 Known gaps, observed from the code. Limitations, not a schedule.
 
@@ -26,7 +26,7 @@ would turn a silent wrong answer into a visible one.
 
 **Over-contribution penalties are documented but not calculated.** The 1% monthly charge is
 the main thing this tool exists to help you avoid, and it is described in
-[Contribution rules](./rules.md) rather than computed. A projected penalty on an
+[Contribution rules](contribution-rules.md) rather than computed. A projected penalty on an
 over-contribution would close the loop.
 
 **Undo is single-step.** It recovers a mistyped amount, not a bad session. Reset has no
@@ -37,7 +37,7 @@ file means re-entering everything by hand.
 
 ## Not modelled
 
-Stated in [Contribution rules](./rules.md), repeated here because each is a deliberate
+Stated in [Contribution rules](contribution-rules.md), repeated here because each is a deliberate
 boundary rather than an oversight:
 
 - Investment growth or loss — room is tracked, balances are not.

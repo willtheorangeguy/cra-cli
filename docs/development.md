@@ -1,4 +1,4 @@
-# CRA CLI — Development
+# Development
 
 ## Commands
 
@@ -15,7 +15,7 @@ npm link             # put the local build on PATH as cra-cli
 ## Stack
 
 | Concern | Choice |
-|---|---|
+| --- | --- |
 | Language | TypeScript, ES2022, strict mode |
 | Runtime | Node.js 20+, ES modules |
 | Prompts | Inquirer.js |

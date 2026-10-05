@@ -1,40 +1,56 @@
-# CRA CLI — Installation
+# Installation
+
+<!-- markdownlint-disable MD046 -->
+
+Install CRA CLI from npm or link a local source checkout onto your `PATH`.
 
 ## Requirements
 
-Node.js 20 or higher. CI builds and tests against Node 20.x and 22.x, and the codebase
-targets ES2022 with ES modules.
+| Requirement | Version | Notes |
+| --- | --- | --- |
+| Node.js | 20 or later | CI also builds on Node 22 |
+| npm | Bundled with Node.js | Used to install and build the package |
 
-## From npm
+## Install
+
+=== "npm"
+
+    ```bash
+    npm install -g cra-cli
+    cra-cli
+    ```
+
+=== "From source"
+
+    ```bash
+    git clone https://github.com/willtheorangeguy/cra-cli.git
+    cd cra-cli
+    npm install
+    npm link
+    ```
+
+    `npm link` compiles TypeScript and makes the local `cra-cli` command available on your `PATH`.
+
+## Verify the installation
+
+Run the command and check that it opens the interactive setup or main menu:
 
 ```bash
-npm install -g cra-cli
 cra-cli
 ```
 
-## From source
+## Upgrading
 
 ```bash
-git clone https://github.com/willtheorangeguy/cra-cli.git
-cd cra-cli
-npm install
-npm link
+npm install -g cra-cli@latest
 ```
 
-`npm link` puts the local build on your `PATH` as `cra-cli`, so you can run your working
-copy the same way you would the published package. Installation and linking automatically
-compile TypeScript into `dist/`, which is gitignored. After editing or pulling source
-changes, use `npm start` to rebuild and run, or `npm run build` before running `cra-cli`
-directly.
-
-## Verify
+## Uninstalling
 
 ```bash
-cra-cli
+npm uninstall -g cra-cli
 ```
 
-The first run prompts for your profile. Nothing is written until you answer.
+For a source checkout linked with `npm link`, run `npm unlink -g` in the checkout. This does not remove your data file at `~/.cra-cli/data.json` (or the equivalent home directory path on Windows).
 
-## Next
-
-[Usage](./usage.md), or [Contribution rules](./rules.md) for what the calculations do.
+{{ support() }}
