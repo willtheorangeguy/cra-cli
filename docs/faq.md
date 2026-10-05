@@ -24,6 +24,6 @@
 
 **Cause.** The global npm executable directory is not on your `PATH`, or the package has not been installed globally.
 
-**Fix.** Install the package globally with `npm install -g cra-cli`, or link the source checkout.
+**Fix.** Install the package globally with `npm install -g @willtheorangeguy/cra-cli`, or link the source checkout.
 
 {{ support() }}

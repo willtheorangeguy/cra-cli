@@ -16,7 +16,7 @@ Install CRA CLI from npm or link a local source checkout onto your `PATH`.
 === "npm"
 
     ```bash
-    npm install -g cra-cli
+    npm install -g @willtheorangeguy/cra-cli
     cra-cli
     ```
 
@@ -42,13 +42,13 @@ cra-cli
 ## Upgrading
 
 ```bash
-npm install -g cra-cli@latest
+npm install -g @willtheorangeguy/cra-cli@latest
 ```
 
 ## Uninstalling
 
 ```bash
-npm uninstall -g cra-cli
+npm uninstall -g @willtheorangeguy/cra-cli
 ```
 
 For a source checkout linked with `npm link`, run `npm unlink -g` in the checkout. This does not remove your data file at `~/.cra-cli/data.json` (or the equivalent home directory path on Windows).

@@ -10,7 +10,7 @@
   <img alt="GitHub Pull Requests" src="https://img.shields.io/github/issues-pr/willtheorangeguy/cra-cli">
   <img alt="License" src="https://img.shields.io/github/license/willtheorangeguy/cra-cli">
   <img alt="CI" src="https://img.shields.io/github/actions/workflow/status/willtheorangeguy/cra-cli/ci.yml">
-  <img alt="npm" src="https://img.shields.io/npm/v/cra-cli">
+  <img alt="npm" src="https://img.shields.io/npm/v/%40willtheorangeguy%2Fcra-cli">
 </div>
 
 <!-- Navigation -->
@@ -36,7 +36,7 @@
 ## Installation
 
 ```bash
-npm install -g cra-cli
+npm install -g @willtheorangeguy/cra-cli
 cra-cli
 ```
 

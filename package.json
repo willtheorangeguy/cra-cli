@@ -1,11 +1,14 @@
 {
-  "name": "cra-cli",
+  "name": "@willtheorangeguy/cra-cli",
   "version": "1.0.0",
   "description": "CLI tool for tracking TFSA and FHSA contributions and calculating contribution room based on CRA rules",
   "main": "dist/index.js",
   "bin": {
     "cra-cli": "./dist/index.js"
   },
+  "files": [
+    "dist/"
+  ],
   "scripts": {
     "build": "tsc",
     "prepare": "npm run build",
@@ -19,7 +22,15 @@
     "type": "git",
     "url": "git+https://github.com/willtheorangeguy/cra-cli.git"
   },
-  "keywords": ["tfsa", "fhsa", "cra", "canada", "tax", "contribution", "cli"],
+  "keywords": [
+    "tfsa",
+    "fhsa",
+    "cra",
+    "canada",
+    "tax",
+    "contribution",
+    "cli"
+  ],
   "author": "willtheorangeguy",
   "license": "MIT",
   "type": "module",

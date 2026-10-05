@@ -13,7 +13,7 @@ CRA CLI is an interactive Node.js tool for tracking TFSA and FHSA contributions 
 ## Quick start
 
 ```bash
-npm install -g cra-cli
+npm install -g @willtheorangeguy/cra-cli
 cra-cli
 ```
 

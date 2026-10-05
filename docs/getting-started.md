@@ -13,7 +13,7 @@ npm is installed with Node.js. Check it with `npm --version`.
 ## Install
 
 ```bash
-npm install -g cra-cli
+npm install -g @willtheorangeguy/cra-cli
 ```
 
 Other installation options are covered in [Installation](installation.md).
