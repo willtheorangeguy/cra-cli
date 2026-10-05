@@ -26,15 +26,29 @@ year. Check the date on the transaction; entering the wrong one shifts that by a
 
 **Installed globally:** confirm the install and that npm's global bin is on your `PATH`.
 
-**Running from source:** you probably skipped the build.
+**Running from source:** install dependencies and link the CLI.
 
 ```bash
-npm run build
+npm install
 npm link
 ```
 
-`dist/` is gitignored, so there is no committed build output — `npm link` without a build
-links nothing.
+Installation and linking automatically build the gitignored `dist/` directory.
+
+## `UnknownPromptTypeError: Prompt type "list" is not registered`
+
+Current menus use Inquirer's `select` prompt. This error indicates that you are running
+an older compiled copy that still uses `list`.
+
+When running from source, rebuild and run with:
+
+```bash
+npm start
+```
+
+If you use the linked `cra-cli` command, run `npm run build` in the source checkout
+first. If the error persists, check `which cra-cli` (or `where cra-cli` on Windows) to
+ensure the command points to the checkout you rebuilt.
 
 ## Node version errors
 

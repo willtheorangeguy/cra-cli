@@ -18,14 +18,14 @@ cra-cli
 git clone https://github.com/willtheorangeguy/cra-cli.git
 cd cra-cli
 npm install
-npm run build
 npm link
 ```
 
 `npm link` puts the local build on your `PATH` as `cra-cli`, so you can run your working
-copy the same way you would the published package. `npm run build` compiles TypeScript
-into `dist/`, which is gitignored — there is no committed build output, so this step is
-required rather than optional.
+copy the same way you would the published package. Installation and linking automatically
+compile TypeScript into `dist/`, which is gitignored. After editing or pulling source
+changes, use `npm start` to rebuild and run, or `npm run build` before running `cra-cli`
+directly.
 
 ## Verify
 
