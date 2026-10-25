@@ -20,7 +20,9 @@ which also covers deliberate non-goals.
 
 **Suggested fix:** Add the current year's limit (a factual CRA value). Separately, compare the highest year in the table against the system clock and warn on a gap.
 
-## 2. package.json declares ISC while LICENSE.md is MIT
+## 2. package.json declares ISC while LICENSE.md is MIT — RESOLVED
+
+**Resolution:** Align package metadata with the existing root MIT license.
 
 **Severity:** Medium
 **Where:** `package.json`
